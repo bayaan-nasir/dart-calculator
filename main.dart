@@ -1,14 +1,18 @@
 import 'dart:io';
 
+import 'currency.dart';
+
 void main() {
-  stdout.writeln("Enter your first name: ");
-  String? name = stdin.readLineSync();
-  print("Hello $name");
+  stdout.writeln("Enter the code of the currency you have: ");
+  String? from = stdin.readLineSync();
 
-  print(sum(2, 5));
-}
+  stdout.writeln("Enter the code of the currency you are converting to: ");
+  String? to = stdin.readLineSync();
 
-int sum(int f, int l) {
-  int sum = f + l;
-  return sum;
+  stdout.writeln("The amount to convert: ");
+  String? rawAmount = stdin.readLineSync();
+  double amount = double.parse('$rawAmount');
+
+  Future<double> result = convert(amount, from, to);
+  print("$amount $from is equivalent to $result $to");
 }
