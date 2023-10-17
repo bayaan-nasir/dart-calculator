@@ -14,5 +14,7 @@ void main() async {
   double amount = double.parse('$rawAmount');
 
   double result = await convert(amount, from, to);
-  print("$amount $from is equivalent to $result $to");
+  result != double.infinity ? 
+    print("$amount $from is equivalent to $result $to")
+  : print("The currency codes are not valid");
 }
