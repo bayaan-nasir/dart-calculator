@@ -1,6 +1,6 @@
 import 'dart:convert';
-
 import "package:http/http.dart" as http;
+import 'secrets.dart';
 
 
 Future<double> convert(double amount, String? from, String? to) async {
@@ -8,7 +8,7 @@ Future<double> convert(double amount, String? from, String? to) async {
     'data.fixer.io',
     '/api/latest',
     {
-      'access_key': 'f075fdfecf7af0bb9bebebc160eee2e1',
+      'access_key': api_key,
       'base': 'EUR',
       'symbols': '$from,$to,EUR',
       'format': '1'
@@ -17,7 +17,9 @@ Future<double> convert(double amount, String? from, String? to) async {
 
   final rawData = await http.read(url);
   final data = json.decode(rawData) as Map<String, dynamic>;
-  double amount = data['rates']['$to'] / data['rates']['$from'];
+  double toRates = data['rates']['$to'] ?? 0.0;
+  double fromRates = data['rates']['$from'] ?? 0.0;
+  double amount =  toRates / fromRates;
 
   return amount;
   
