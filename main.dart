@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'currency.dart';
 
-void main() {
+void main() async {
   stdout.writeln("Enter the code of the currency you have: ");
   String? from = stdin.readLineSync();
 
@@ -13,6 +13,6 @@ void main() {
   String? rawAmount = stdin.readLineSync();
   double amount = double.parse('$rawAmount');
 
-  Future<double> result = convert(amount, from, to);
+  double result = await convert(amount, from, to);
   print("$amount $from is equivalent to $result $to");
 }
