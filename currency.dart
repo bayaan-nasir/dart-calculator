@@ -19,8 +19,8 @@ Future<double> convert(double amount, String? from, String? to) async {
   final data = json.decode(rawData) as Map<String, dynamic>;
   double toRates = data['rates']['$to'] ?? 0.0;
   double fromRates = data['rates']['$from'] ?? 0.0;
-  double amount =  toRates / fromRates;
+  double result =  amount * (toRates / fromRates);
 
-  return amount;
+  return result;
   
 }
